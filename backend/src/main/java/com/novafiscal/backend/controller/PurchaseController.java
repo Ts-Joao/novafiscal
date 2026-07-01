@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/apí/v1/purchases")
+@RequestMapping("/purchases")
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
