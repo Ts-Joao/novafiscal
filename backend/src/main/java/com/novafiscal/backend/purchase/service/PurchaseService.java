@@ -1,6 +1,6 @@
-package com.novafiscal.backend.service;
+package com.novafiscal.backend.purchase.service;
 
-import com.novafiscal.backend.dto.PurchaseRequestDTO;
+import com.novafiscal.backend.purchase.dto.PurchaseRequestDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

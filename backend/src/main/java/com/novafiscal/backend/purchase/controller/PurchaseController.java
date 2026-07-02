@@ -1,7 +1,7 @@
-package com.novafiscal.backend.controller;
+package com.novafiscal.backend.purchase.controller;
 
-import com.novafiscal.backend.dto.PurchaseRequestDTO;
-import com.novafiscal.backend.service.PurchaseService;
+import com.novafiscal.backend.purchase.dto.PurchaseRequestDTO;
+import com.novafiscal.backend.purchase.service.PurchaseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

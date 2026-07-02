@@ -1,4 +1,4 @@
-package com.novafiscal.backend.dto;
+package com.novafiscal.backend.purchase.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,19 +19,5 @@ public class PurchaseRequestDTO {
     private BigDecimal totalAmount;
 
     @NotNull
-    private List<ItemDTO> items;
-
-    @Getter
-    @Setter
-    public static class ItemDTO {
-
-        @NotBlank
-        private String description;
-
-        @NotNull
-        private Integer quantity;
-
-        @NotNull
-        private Integer price;
-    }
+    private List<PurchaseItemRequestDTO> items;
 }
