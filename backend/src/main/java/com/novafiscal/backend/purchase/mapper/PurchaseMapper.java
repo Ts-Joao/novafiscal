@@ -7,6 +7,7 @@ import com.novafiscal.backend.purchase.api.dto.PurchaseResponseDTO;
 import com.novafiscal.backend.purchase.domain.model.Purchase;
 import com.novafiscal.backend.purchase.domain.model.PurchaseItem;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(
@@ -15,6 +16,9 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface PurchaseMapper {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "totalAmount", ignore = true)
     Purchase toDomain(PurchaseRequestDTO dto);
 
     PurchaseResponseDTO toResponse(Purchase purchase);
