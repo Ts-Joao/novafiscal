@@ -5,16 +5,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 @Getter
 @Setter
-public class PurchaseRequestDTO {
-
+public class PurchaseItemRequestDTO {
+    
     @NotBlank
-    private String customerName;
+    private String description;
 
     @NotNull
-    private List<PurchaseItemRequestDTO> items;
+    private Integer quantity;
+
+    @NotNull
+    private Integer price;
 }
