@@ -1,6 +1,9 @@
 package com.novafiscal.backend.purchase.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -8,7 +11,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
@@ -32,15 +34,15 @@ public class Purchase {
     }
 
     public void generateIdentifier() {
-        setId(UUID.randomUUID());
+        this.id = UUID.randomUUID();
     }
 
     public void markAsCreated() {
-        setCreatedAt(Instant.now());
+        this.createdAt = Instant.now();
     }
 
     public void updateTotalAmount() {
-        setTotalAmount(calculateTotalAmount());
+        this.totalAmount = calculateTotalAmount();
     }
 
     private boolean hasItems() {
