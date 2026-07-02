@@ -1,9 +1,9 @@
-package com.novafiscal.backend.purchase.service;
+package com.novafiscal.backend.purchase.domain.service;
 
-import com.novafiscal.backend.purchase.dto.PurchaseItemResponseDTO;
-import com.novafiscal.backend.purchase.dto.PurchaseItemRequestDTO;
-import com.novafiscal.backend.purchase.dto.PurchaseRequestDTO;
-import com.novafiscal.backend.purchase.dto.PurchaseResponseDTO;
+import com.novafiscal.backend.purchase.api.dto.PurchaseItemResponseDTO;
+import com.novafiscal.backend.purchase.api.dto.PurchaseItemRequestDTO;
+import com.novafiscal.backend.purchase.api.dto.PurchaseRequestDTO;
+import com.novafiscal.backend.purchase.api.dto.PurchaseResponseDTO;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

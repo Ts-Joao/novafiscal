@@ -1,4 +1,4 @@
-package com.novafiscal.backend.common.response;
+package com.novafiscal.backend.common.validation;
 
 import java.time.Instant;
 import java.util.List;

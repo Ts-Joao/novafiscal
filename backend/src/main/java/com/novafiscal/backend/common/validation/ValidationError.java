@@ -1,4 +1,4 @@
-package com.novafiscal.backend.common.response;
+package com.novafiscal.backend.common.validation;
 
 public record ValidationError(
         String field,

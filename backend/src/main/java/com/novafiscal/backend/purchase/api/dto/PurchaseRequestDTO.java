@@ -1,11 +1,10 @@
-package com.novafiscal.backend.purchase.dto;
+package com.novafiscal.backend.purchase.api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
