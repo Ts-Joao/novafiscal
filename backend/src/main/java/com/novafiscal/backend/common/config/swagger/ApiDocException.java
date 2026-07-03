@@ -18,7 +18,10 @@ import java.lang.annotation.Target;
     @ApiResponse(
         responseCode = "400",
         description = "Erro de validação nos campos enviados",
-        content = @Content(schema = @Schema(implementation = ValidationErrorResponse.class))
+        content = {
+            @Content(schema = @Schema(implementation = ValidationErrorResponse.class)),
+            @Content(schema = @Schema(implementation = ApiErrorResponse.class))
+        }
     ),
     @ApiResponse(
         responseCode = "404",

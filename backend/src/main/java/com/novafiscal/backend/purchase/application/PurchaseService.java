@@ -1,6 +1,6 @@
 package com.novafiscal.backend.purchase.application;
 
-import com.novafiscal.backend.common.exception.DomainException;
+import com.novafiscal.backend.common.exception.ResourceNotFoundException;
 import com.novafiscal.backend.purchase.domain.model.Purchase;
 import com.novafiscal.backend.purchase.domain.repository.PurchaseRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +23,6 @@ public class PurchaseService {
     }
 
     public Purchase findById(UUID id) {
-        return purchaseRepository.findById(id).orElseThrow(() -> new DomainException("Compra não encontrada."));
+        return purchaseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Compra não encontrada: " + id));
     }
 }
