@@ -6,6 +6,7 @@ import com.novafiscal.backend.purchase.infrastructure.persistence.SpringDataPurc
 import com.novafiscal.backend.purchase.mapper.PurchaseEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -29,6 +30,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Purchase>findById(UUID id) {
         return springDataPurchaseRepository.findById(id)
                 .map(purchaseEntityMapper::toDomain);
