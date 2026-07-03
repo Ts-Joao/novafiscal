@@ -1,9 +1,12 @@
 package com.novafiscal.backend.purchase.application;
 
+import com.novafiscal.backend.common.exception.DomainException;
 import com.novafiscal.backend.purchase.domain.model.Purchase;
 import com.novafiscal.backend.purchase.domain.repository.PurchaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -17,5 +20,9 @@ public class PurchaseService {
         purchase.markAsCreated();
         purchase.updateTotalAmount();
         return purchaseRepository.save(purchase);
+    }
+
+    public Purchase findById(UUID id) {
+        return purchaseRepository.findById(id).orElseThrow(() -> new DomainException("Compra não encontrada."));
     }
 }

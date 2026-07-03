@@ -14,12 +14,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Tag(name = "Purchase", description = "Operações relacionadas ao processamento de compras")
 @RequiredArgsConstructor
@@ -53,6 +51,25 @@ public class PurchaseController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
+                .body(new ApiResponse<>(Instant.now(), response));
+    }
+
+    @Operation(
+        summary = "Busca uma compra pelo seu identificador único",
+        description = "Retorna os detalhes completos de uma compra, incluindo itens, data e valor total."
+    )
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "Compra encontrada com sucesso"
+        )
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<PurchaseResponseDTO>> findPurchaseById(@PathVariable UUID id) {
+        Purchase purchase = purchaseService.findById(id);
+        PurchaseResponseDTO response = purchaseMapper.toResponse(purchase);
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(new ApiResponse<>(Instant.now(), response));
     }
 }
