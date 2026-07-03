@@ -20,7 +20,6 @@ public interface PurchaseMapper {
 
     PurchaseResponseDTO toResponse(Purchase purchase);
 
-    @Mapping(target = "id", ignore = true)
     PurchaseItem toDomain(PurchaseItemRequestDTO dto);
 
     PurchaseItemResponseDTO toResponse(PurchaseItem item);

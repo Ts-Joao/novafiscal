@@ -1,5 +1,6 @@
 package com.novafiscal.backend.purchase.api.controller;
 
+import com.novafiscal.backend.common.config.swagger.ApiDocException;
 import com.novafiscal.backend.common.response.ApiResponse;
 import com.novafiscal.backend.purchase.api.dto.PurchaseRequestDTO;
 import com.novafiscal.backend.purchase.api.dto.PurchaseResponseDTO;
@@ -24,6 +25,7 @@ import java.time.Instant;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/purchases")
+@ApiDocException
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
@@ -39,15 +41,6 @@ public class PurchaseController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(
                     responseCode = "201",
                     description = "Compra criada com sucesso"
-            ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
-                    responseCode = "400",
-                    description = "Erro de validação de entrada ou violação de regra de negócio "
-                            + "(ex.: lista de itens vazia, preço inválido)"
-            ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
-                    responseCode = "500",
-                    description = "Erro interno inesperado"
             )
     })
     @PostMapping
