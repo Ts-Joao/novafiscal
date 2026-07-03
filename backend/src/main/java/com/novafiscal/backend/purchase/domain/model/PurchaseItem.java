@@ -24,13 +24,13 @@ public class PurchaseItem {
     }
 
     private void validatePrice() {
-        if (price.compareTo(BigDecimal.ZERO) <= 0) {
+        if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Price cannot be negative or zero for item: " + description);
         }
     }
 
     private void validateQuantity() {
-        if (quantity < 0) {
+        if (quantity == null || quantity < 0) {
             throw new IllegalArgumentException("Quantity must be greater than 0 for item: " + description);
         }
     }
