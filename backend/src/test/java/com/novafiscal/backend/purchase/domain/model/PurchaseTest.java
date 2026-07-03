@@ -9,13 +9,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PurchaseTest {
+class PurchaseTest {
 
-    Purchase purchase;
+    Purchase purchaseA;
 
     @BeforeEach
     void setUp() {
-        purchase = Purchase.builder()
+        purchaseA = Purchase.builder()
                 .customerName("João Teixeira")
                 .items(List.of(
                         PurchaseItem.builder().price(BigDecimal.valueOf(20)).quantity(2).build(),
@@ -29,15 +29,15 @@ public class PurchaseTest {
 
         @Test
         void shouldSumAllItemSubTotal_whenCalled() {
-            purchase.updateTotalAmount();
-            assertEquals(BigDecimal.valueOf(55), purchase.getTotalAmount());
+            purchaseA.updateTotalAmount();
+            assertEquals(BigDecimal.valueOf(55), purchaseA.getTotalAmount());
         }
 
         @Test
         void shouldResultInZero_whenItemsInListIsEmpty() {
-            purchase = purchase.toBuilder().items(List.of()).build();
-            purchase.updateTotalAmount();
-            assertEquals(BigDecimal.ZERO, purchase.getTotalAmount());
+            Purchase purchaseB = purchaseA.toBuilder().items(List.of()).build();
+            purchaseB.updateTotalAmount();
+            assertEquals(BigDecimal.ZERO, purchaseB.getTotalAmount());
         }
     }
 
@@ -46,31 +46,41 @@ public class PurchaseTest {
 
         @Test
         void shouldValidateSuccessfully_whenItemsExist() {
-            assertDoesNotThrow(() -> purchase.validate());
+            assertDoesNotThrow(() -> purchaseA.validate());
         }
 
         @Test
         void shouldThrowException_whenItemsIsNull() {
-            purchase = purchase.toBuilder().items(null).build();
-            assertThrows(IllegalArgumentException.class, purchase::validate);
+            Purchase purchaseB = purchaseA.toBuilder().items(null).build();
+            assertThrows(IllegalArgumentException.class, purchaseB::validate);
         }
 
         @Test
         void shouldThrowException_whenListIsEmpty() {
-            purchase = purchase.toBuilder().items(List.of()).build();
-            assertThrows(IllegalArgumentException.class, purchase::validate);
+            Purchase purchaseB = purchaseA.toBuilder().items(List.of()).build();
+            assertThrows(IllegalArgumentException.class, purchaseB::validate);
         }
     }
 
     @Test
     void shouldGenerateNonNullIdentifier_whenCalled() {
-        purchase.generateIdentifier();
-        assertNotNull(purchase.getId());
+        purchaseA.generateIdentifier();
+        assertNotNull(purchaseA.getId());
     }
 
     @Test
     void shouldSetCreatedAtToNonNullValue_whenMarkedAsCreated() {
-        purchase.markAsCreated();
-        assertNotNull(purchase.getCreatedAt());
+        purchaseA.markAsCreated();
+        assertNotNull(purchaseA.getCreatedAt());
+    }
+
+    @Test
+    void shouldThrowException_whenAnyItemIsInvalid() {
+        Purchase purchaseB = purchaseA.toBuilder()
+                .items(List.of(
+                        PurchaseItem.builder().price(null).quantity(1).build()
+                ))
+                .build();
+        assertThrows(IllegalArgumentException.class, purchaseB::validate);
     }
 }
