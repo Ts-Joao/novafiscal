@@ -1,5 +1,6 @@
 package com.novafiscal.backend.purchase.domain.model;
 
+import com.novafiscal.backend.common.exception.DomainException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -51,7 +52,7 @@ public class Purchase {
 
     public void validate() {
         if (!hasItems()) {
-            throw new IllegalArgumentException("Purchase must contain at least one item");
+            throw new DomainException("Purchase must contain at least one item");
         }
 
         items.forEach(PurchaseItem::validate);

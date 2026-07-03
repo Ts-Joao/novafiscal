@@ -1,5 +1,6 @@
 package com.novafiscal.backend.purchase.domain.model;
 
+import com.novafiscal.backend.common.exception.DomainException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -52,13 +53,13 @@ class PurchaseTest {
         @Test
         void shouldThrowException_whenItemsIsNull() {
             Purchase purchaseB = purchaseA.toBuilder().items(null).build();
-            assertThrows(IllegalArgumentException.class, purchaseB::validate);
+            assertThrows(DomainException.class, purchaseB::validate);
         }
 
         @Test
         void shouldThrowException_whenListIsEmpty() {
             Purchase purchaseB = purchaseA.toBuilder().items(List.of()).build();
-            assertThrows(IllegalArgumentException.class, purchaseB::validate);
+            assertThrows(DomainException.class, purchaseB::validate);
         }
     }
 
@@ -81,6 +82,6 @@ class PurchaseTest {
                         PurchaseItem.builder().price(null).quantity(1).build()
                 ))
                 .build();
-        assertThrows(IllegalArgumentException.class, purchaseB::validate);
+        assertThrows(DomainException.class, purchaseB::validate);
     }
 }

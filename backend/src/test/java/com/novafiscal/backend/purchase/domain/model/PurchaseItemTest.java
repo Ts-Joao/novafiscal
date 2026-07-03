@@ -1,5 +1,6 @@
 package com.novafiscal.backend.purchase.domain.model;
 
+import com.novafiscal.backend.common.exception.DomainException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ class PurchaseItemTest {
                     .price(null)
                     .build();
 
-            assertThrows(IllegalArgumentException.class, itemB::validate);
+            assertThrows(DomainException.class, itemB::validate);
         }
 
         @Test
@@ -53,7 +54,7 @@ class PurchaseItemTest {
                 .price(BigDecimal.valueOf(-1))
                 .build();
 
-            assertThrows(IllegalArgumentException.class, itemB::validate);
+            assertThrows(DomainException.class, itemB::validate);
         }
 
         @Test
@@ -62,7 +63,7 @@ class PurchaseItemTest {
                     .quantity(null)
                     .build();
 
-            assertThrows(IllegalArgumentException.class, itemB::validate);
+            assertThrows(DomainException.class, itemB::validate);
         }
 
         @Test
@@ -71,7 +72,7 @@ class PurchaseItemTest {
                     .quantity(-1)
                     .build();
 
-            assertThrows(IllegalArgumentException.class, itemB::validate);
+            assertThrows(DomainException.class, itemB::validate);
         }
     }
 }
