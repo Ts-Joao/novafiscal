@@ -4,6 +4,7 @@ import com.novafiscal.backend.common.exception.DomainException;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @Builder(toBuilder = true)
 public class PurchaseItem {
 
+    private UUID id;
     private String description;
     private BigDecimal price;
     private Integer quantity;
