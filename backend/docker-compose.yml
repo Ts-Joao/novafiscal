@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: novafiscal-postgres
+    environment:
+      POSTGRES_DB: novafiscal
+      POSTGRES_USER: novafiscal
+      POSTGRES_PASSWORD: novafiscal
+    ports:
+      - "5432:5432"
+    volumes:
+      - novafiscal-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  novafiscal-postgres-data:
