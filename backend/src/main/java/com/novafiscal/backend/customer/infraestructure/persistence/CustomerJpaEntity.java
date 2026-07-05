@@ -1,5 +1,6 @@
 package com.novafiscal.backend.customer.infraestructure.persistence;
 
+import com.novafiscal.backend.customer.domain.model.CustomerStatus;
 import com.novafiscal.backend.customer.domain.model.CustomerType;
 import com.novafiscal.backend.customer.domain.model.DocumentType;
 import jakarta.persistence.*;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -51,9 +53,10 @@ public class CustomerJpaEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private CustomerType type;
+    private CustomerStatus status;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
     @Column(name = "updated_at")

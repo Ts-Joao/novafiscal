@@ -22,7 +22,7 @@ public class Address {
     private boolean isDefault;
 
     public static Address create(AddressType type, String street, String number, String complement,
-                    String neighborhood, String city, String zipCode, boolean isDefault) {
+                String neighborhood, String city, String state, String zipCode, boolean isDefault) {
         return Address.builder()
                 .id(UUID.randomUUID())
                 .type(type)
@@ -31,13 +31,14 @@ public class Address {
                 .complement(complement)
                 .neighborhood(neighborhood)
                 .city(city)
+                .state(state)
                 .zipCode(zipCode)
                 .isDefault(isDefault)
                 .build();
     }
 
-    public static Address reconstitute(UUID id, AddressType type, String street, String number,
-                    String complement, String neighborhood, String city, String zipCode, boolean isDefault) {
+    public static Address reconstitute(UUID id, AddressType type, String street, String number, String complement,
+                String neighborhood, String city, String state, String zipCode, boolean isDefault) {
         return Address.builder()
                 .id(id)
                 .type(type)
@@ -46,6 +47,7 @@ public class Address {
                 .complement(complement)
                 .neighborhood(neighborhood)
                 .city(city)
+                .state(state)
                 .zipCode(zipCode)
                 .isDefault(isDefault)
                 .build();

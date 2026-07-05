@@ -64,7 +64,7 @@ public class Customer {
     }
 
     public boolean hasCompleteRegistration() {
-        return this.legalName != null && this.legalName.isBlank()
-                && this.addresses != null && this.addresses.isEmpty();
+        return this.legalName != null && !this.legalName.isBlank()
+                && this.addresses != null && !this.addresses.isEmpty();
     }
 }
