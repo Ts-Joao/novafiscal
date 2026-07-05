@@ -1,0 +1,52 @@
+package com.novafiscal.backend.customer.mapper;
+
+import com.novafiscal.backend.customer.domain.model.Address;
+import com.novafiscal.backend.customer.domain.model.Customer;
+import com.novafiscal.backend.customer.infraestructure.persistence.AddressJpaEntity;
+import com.novafiscal.backend.customer.infraestructure.persistence.CustomerJpaEntity;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.ReportingPolicy;
+
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
+public interface CustomerEntityMapper {
+
+    @Mapping(target = "documentNumber", source = "document.number")
+    @Mapping(target = "documentType", source = "document.type")
+    @Mapping(target = "addresses", source = "addresses")
+    CustomerJpaEntity toEntity(Customer customer);
+
+    @Mapping(target = "document",
+              expression = "java(new Document(entity.getDocumentNumber(), entity.getDocumentType()))")
+    Customer toDomain(CustomerJpaEntity entity);
+
+    @Mapping(target = "customer", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "addressType", ignore = true)
+    @Mapping(target = "isDefault", ignore = true)
+    AddressJpaEntity toEntity(Address address);
+
+    default Address toDomain(AddressJpaEntity entity) {
+        return Address.reconstitute(
+                entity.getId(),
+                entity.getAddressType(),
+                entity.getStreet(),
+                entity.getNumber(),
+                entity.getComplement(),
+                entity.getNeighborhood(),
+                entity.getCity(),
+                entity.getState(),
+                entity.getZipCode(),
+                entity.isDefault()
+        );
+    }
+
+    @AfterMapping
+    default void linkAddressesToCustomer(@MappingTarget CustomerJpaEntity entity) {
+        if (entity.getAddresses() != null) {
+            entity.getAddresses().forEach(address -> address.setCustomer(entity));
+        }
+    }
+}
