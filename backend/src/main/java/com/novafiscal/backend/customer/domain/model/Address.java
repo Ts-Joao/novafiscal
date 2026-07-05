@@ -2,6 +2,7 @@ package com.novafiscal.backend.customer.domain.model;
 
 import lombok.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Getter
@@ -20,6 +21,7 @@ public class Address {
     private String state;
     private String zipCode;
     private boolean isDefault;
+    private Instant createdAt;
 
     public static Address create(AddressType type, String street, String number, String complement,
                     String neighborhood, String city, String zipCode, boolean isDefault) {
@@ -33,6 +35,7 @@ public class Address {
                 .city(city)
                 .zipCode(zipCode)
                 .isDefault(isDefault)
+                .createdAt(Instant.now())
                 .build();
     }
 

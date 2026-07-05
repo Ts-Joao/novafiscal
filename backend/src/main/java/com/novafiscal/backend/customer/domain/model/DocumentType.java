@@ -1,7 +1,6 @@
 package com.novafiscal.backend.customer.domain.model;
 
 public enum DocumentType {
-
     CPF,
     CNPJ;
 
