@@ -1,13 +1,10 @@
 package com.novafiscal.backend.customer.application;
 
 import com.novafiscal.backend.common.exception.ResourceNotFoundException;
-import com.novafiscal.backend.customer.api.dto.AddAddressRequestDTO;
-import com.novafiscal.backend.customer.api.dto.CreateCustomerRequestDTO;
 import com.novafiscal.backend.customer.api.dto.UpdateContactInfoRequestDTO;
 import com.novafiscal.backend.customer.domain.exception.DuplicatedCustomerException;
 import com.novafiscal.backend.customer.domain.model.Address;
 import com.novafiscal.backend.customer.domain.model.Customer;
-import com.novafiscal.backend.customer.domain.model.Document;
 import com.novafiscal.backend.customer.domain.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,7 +38,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer active(UUID id) {
+    public Customer activate(UUID id) {
         Customer customer = findById(id);
         customer.activate();
         return customerRepository.save(customer);

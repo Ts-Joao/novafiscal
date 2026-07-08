@@ -5,6 +5,7 @@ import com.novafiscal.backend.common.response.ApiResponse;
 import com.novafiscal.backend.customer.api.dto.AddAddressRequestDTO;
 import com.novafiscal.backend.customer.api.dto.CreateCustomerRequestDTO;
 import com.novafiscal.backend.customer.api.dto.CustomerResponseDTO;
+import com.novafiscal.backend.customer.api.dto.UpdateContactInfoRequestDTO;
 import com.novafiscal.backend.customer.application.CustomerService;
 import com.novafiscal.backend.customer.domain.model.Address;
 import com.novafiscal.backend.customer.domain.model.Customer;
@@ -120,7 +121,7 @@ public class CustomerController {
     })
     @PatchMapping("/{id}/activate")
     public ResponseEntity<ApiResponse<CustomerResponseDTO>> activeCustomer(@PathVariable UUID id) {
-        Customer customer = customerService.active(id);
+        Customer customer = customerService.activate(id);
         CustomerResponseDTO response = customerMapper.toResponse(customer);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -139,8 +140,10 @@ public class CustomerController {
         )
     })
     @PatchMapping("/{id}/contact-info")
-    public ResponseEntity<ApiResponse<CustomerResponseDTO>> updateContactInfo(@PathVariable UUID id) {
-        Customer customer = customerService.findById(id);
+    public ResponseEntity<ApiResponse<CustomerResponseDTO>> updateContactInfo(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateContactInfoRequestDTO dto) {
+        Customer customer = customerService.updateContactInfo(id, dto);
         CustomerResponseDTO response = customerMapper.toResponse(customer);
         return ResponseEntity
                 .status(HttpStatus.OK)
