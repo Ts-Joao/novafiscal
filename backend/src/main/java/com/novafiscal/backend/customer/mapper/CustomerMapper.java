@@ -1,16 +1,15 @@
 package com.novafiscal.backend.customer.mapper;
 
-import com.novafiscal.backend.customer.api.dto.AddAddressRequestDTO;
-import com.novafiscal.backend.customer.api.dto.AddressResponseDTO;
-import com.novafiscal.backend.customer.api.dto.CreateCustomerRequestDTO;
-import com.novafiscal.backend.customer.api.dto.CustomerResponseDTO;
+import com.novafiscal.backend.customer.api.dto.*;
 import com.novafiscal.backend.customer.domain.model.Address;
 import com.novafiscal.backend.customer.domain.model.Customer;
 import com.novafiscal.backend.customer.domain.model.Document;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface CustomerMapper {
 
     default Customer toDomain(CreateCustomerRequestDTO dto) {
@@ -42,5 +41,8 @@ public interface CustomerMapper {
 
     CustomerResponseDTO toResponse(Customer customer);
 
+    @Mapping(target = "isDefault", ignore = true)
     AddressResponseDTO toResponse(Address address);
+
+    DocumentResponseDTO toResponse(Document document);
 }

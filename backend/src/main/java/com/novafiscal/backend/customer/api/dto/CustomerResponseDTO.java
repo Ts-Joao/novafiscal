@@ -18,11 +18,14 @@ public record CustomerResponseDTO(
         @Schema(description = "Tipo de cliente")
         CustomerType customerType,
 
-        @Schema(description = "Tipo do documento")
-        DocumentType documentType,
+        @Schema(description = "Documento do cliente")
+        DocumentResponseDTO document,
 
         @Schema(description = "Nome legal")
         String legalName,
+
+        @Schema(description = "Nome fantasia")
+        String tradeName,
 
         @Schema(description = "Telefone")
         String phone,
