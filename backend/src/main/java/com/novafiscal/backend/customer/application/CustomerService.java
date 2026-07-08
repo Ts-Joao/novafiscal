@@ -20,24 +20,12 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public Customer create(CreateCustomerRequestDTO request) {
-        boolean alreadyExist = customerRepository.existsByDocumentNumber(request.documentNumber());
+    public Customer create(Customer customer) {
+        boolean alreadyExist = customerRepository.existsByDocumentNumber(customer.getDocument().number());
 
         if (alreadyExist) {
-           throw new DuplicatedCustomerException("Customer already exists with document: " + request.documentNumber());
+           throw new DuplicatedCustomerException("Customer already exists with document: " + customer.getDocument().number());
         }
-
-        Document document = new Document(request.documentNumber(), request.documentType());
-
-        Customer customer = Customer.create(
-                request.customerType(),
-                document,
-                request.legalName(),
-                request.tradeName(),
-                request.phone(),
-                request.email(),
-                request.stateRegistration()
-        );
 
         return customerRepository.save(customer);
     }
@@ -65,21 +53,8 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer addAddress(UUID customerId, AddAddressRequestDTO request) {
+    public Customer addAddress(UUID customerId, Address address) {
         Customer customer = findById(customerId);
-
-        Address address = Address.create(
-            request.type(),
-            request.street(),
-            request.number(),
-            request.complement(),
-            request.neighborhood(),
-            request.city(),
-            request.state(),
-            request.zipCode(),
-            request.isDefault()
-        );
-
         customer.addAddress(address);
         return customerRepository.save(customer);
     }
