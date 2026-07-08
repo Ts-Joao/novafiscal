@@ -2,6 +2,7 @@ package com.novafiscal.backend.customer.mapper;
 
 import com.novafiscal.backend.customer.domain.model.Address;
 import com.novafiscal.backend.customer.domain.model.Customer;
+import com.novafiscal.backend.customer.domain.model.Document;
 import com.novafiscal.backend.customer.infraestructure.persistence.AddressJpaEntity;
 import com.novafiscal.backend.customer.infraestructure.persistence.CustomerJpaEntity;
 import org.mapstruct.AfterMapping;
@@ -18,14 +19,25 @@ public interface CustomerEntityMapper {
     @Mapping(target = "addresses", source = "addresses")
     CustomerJpaEntity toEntity(Customer customer);
 
-    @Mapping(target = "document",
-              expression = "java(new Document(entity.getDocumentNumber(), entity.getDocumentType()))")
-    Customer toDomain(CustomerJpaEntity entity);
+        default Customer toDomain(CustomerJpaEntity entity) {
+        return Customer.reconstitute(
+                entity.getId(),
+                entity.getCustomerType(),
+                new Document(entity.getDocumentNumber(), entity.getDocumentType()),
+                entity.getLegalName(),
+                entity.getTradeName(),
+                entity.getPhone(),
+                entity.getEmail(),
+                entity.getStateRegistration(),
+                entity.getStatus(),
+                entity.getAddresses().stream().map(this::toDomain).collect(java.util.stream.Collectors.toList()),
+                entity.getCreatedAt(),
+                entity.getUpdatedAt()
+        );
+    }
 
     @Mapping(target = "customer", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "addressType", ignore = true)
-    @Mapping(target = "isDefault", ignore = true)
     AddressJpaEntity toEntity(Address address);
 
     default Address toDomain(AddressJpaEntity entity) {

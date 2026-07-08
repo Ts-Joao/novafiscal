@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Customer {
@@ -27,11 +27,51 @@ public class Customer {
     private Instant createdAt;
     private Instant updatedAt;
 
-    public void generateIdentifier() {
+    public static Customer create(CustomerType customerType, Document document, String legalName,
+                                   String tradeName, String phone, String email, String stateRegistration) {
+        Customer customer = Customer.builder()
+                .customerType(customerType)
+                .document(document)
+                .legalName(legalName)
+                .tradeName(tradeName)
+                .phone(phone)
+                .email(email)
+                .stateRegistration(stateRegistration)
+                .status(CustomerStatus.ACTIVE)
+                .addresses(new ArrayList<>())
+                .build();
+
+        customer.generateIdentifier();
+        customer.markAsCreated();
+
+        return customer;
+    }
+
+    public static Customer reconstitute(UUID id, CustomerType customerType, Document document, String legalName,
+                                         String tradeName, String phone, String email, String stateRegistration,
+                                         CustomerStatus status, List<Address> addresses,
+                                         Instant createdAt, Instant updatedAt) {
+        return Customer.builder()
+                .id(id)
+                .customerType(customerType)
+                .document(document)
+                .legalName(legalName)
+                .tradeName(tradeName)
+                .phone(phone)
+                .email(email)
+                .stateRegistration(stateRegistration)
+                .status(status)
+                .addresses(addresses)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .build();
+    }
+
+    private void generateIdentifier() {
         this.id = UUID.randomUUID();
     }
 
-    public void markAsCreated() {
+    private void markAsCreated() {
         this.createdAt = Instant.now();
     }
 
@@ -50,7 +90,7 @@ public class Customer {
         if (this.addresses == null) {
             this.addresses = new ArrayList<>();
         }
-        this.addresses.add((address));
+        this.addresses.add(address);
     }
 
     public void updateContactInfo(String phone, String email) {
