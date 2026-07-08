@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record AddAddressRequestDTO(
 
-    @Schema(description = "Tipo de endereço", example = "RESIDENCIAL")
+    @Schema(description = "Tipo de endereço", example = "MAIN")
     @NotNull
     AddressType type,
 
