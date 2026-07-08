@@ -41,7 +41,7 @@ public interface CustomerMapper {
 
     CustomerResponseDTO toResponse(Customer customer);
 
-    @Mapping(target = "isDefault", ignore = true)
+    @Mapping(target = "isDefault", source = "default")
     AddressResponseDTO toResponse(Address address);
 
     DocumentResponseDTO toResponse(Document document);

@@ -38,14 +38,13 @@ public interface CustomerEntityMapper {
 
     @Mapping(target = "customer", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "addressType", ignore = true)
-    @Mapping(target = "isDefault", ignore = true)
+    @Mapping(target = "isDefault", source = "default")
     AddressJpaEntity toEntity(Address address);
 
     default Address toDomain(AddressJpaEntity entity) {
         return Address.reconstitute(
                 entity.getId(),
-                entity.getAddressType(),
+                entity.getType(),
                 entity.getStreet(),
                 entity.getNumber(),
                 entity.getComplement(),
