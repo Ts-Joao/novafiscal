@@ -49,6 +49,7 @@ public class AddressJpaEntity {
     private String zipCode;
 
     @Column(name = "is_default", nullable = false)
+    @Builder.Default
     private boolean isDefault = false;
 
     @Column(name = "created_at", nullable = false)
