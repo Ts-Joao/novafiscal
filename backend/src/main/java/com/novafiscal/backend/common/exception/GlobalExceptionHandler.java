@@ -3,6 +3,7 @@ package com.novafiscal.backend.common.exception;
 import com.novafiscal.backend.common.response.ApiErrorResponse;
 import com.novafiscal.backend.common.validation.ValidationError;
 import com.novafiscal.backend.common.validation.ValidationErrorResponse;
+import com.novafiscal.backend.customer.domain.exception.DuplicatedCustomerException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -79,5 +80,18 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
+    @ExceptionHandler(DuplicatedCustomerException.class)
+    public ResponseEntity<ApiErrorResponse> handleDuplicatedCustomerException(
+            DuplicatedCustomerException ex, HttpServletRequest request) {
+        ApiErrorResponse error = new ApiErrorResponse(
+                Instant.now(),
+                HttpStatus.CONFLICT.value(),
+                "Duplicated Customer",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
