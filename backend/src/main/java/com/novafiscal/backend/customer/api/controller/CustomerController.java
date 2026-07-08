@@ -38,11 +38,11 @@ public class CustomerController {
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
 
-    @Operation(summary = "Create a new customer", description = "Creates a new customer with the provided data")
+    @Operation(summary = "Criar um novo cliente", description = "Cria um novo cliente com os dados fornecidos")
     @ApiResponses(value = {
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
             responseCode = "201",
-            description = "Customer created successfully"
+            description = "Cliente criado com sucesso"
         ),
         @io.swagger.v3.oas.annotations.responses.ApiResponse(
             responseCode = "400",
