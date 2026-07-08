@@ -3,6 +3,7 @@ package com.novafiscal.backend.customer.infraestructure.persistence;
 import com.novafiscal.backend.customer.domain.model.AddressType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class AddressJpaEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "address_type", nullable = false)
-    private AddressType addressType;
+    private AddressType type;
 
     @Column(name = "street", nullable = false)
     private String street;
@@ -52,6 +53,7 @@ public class AddressJpaEntity {
     @Builder.Default
     private boolean isDefault = false;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 }
