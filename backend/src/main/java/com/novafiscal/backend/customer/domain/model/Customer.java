@@ -90,6 +90,9 @@ public class Customer {
         if (this.addresses == null) {
             this.addresses = new ArrayList<>();
         }
+        if (address.isDefault()) {
+            this.addresses.forEach(Address::unmarkAsDefault);
+        }
         this.addresses.add(address);
     }
 
