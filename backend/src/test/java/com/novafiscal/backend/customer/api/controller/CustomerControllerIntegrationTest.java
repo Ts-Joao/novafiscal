@@ -98,14 +98,7 @@ class CustomerControllerIntegrationTest {
 
         @Test
         void shouldReturn200_whenCustomerExists() throws Exception {
-            MvcResult result = mockMvc.perform(post("/customers")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(customerJson))
-                    .andExpect(status().isCreated())
-                    .andReturn();
-
-            String responseBody = result.getResponse().getContentAsString();
-            String id = JsonPath.read(responseBody, "$.data.id");
+            String id = createCustomerAndExtractId();
 
             mockMvc.perform(get("/customers/{id}", id))
                     .andExpect(status().isOk())
@@ -131,14 +124,7 @@ class CustomerControllerIntegrationTest {
 
         @Test
         void shouldReturn200_whenCustomerExists() throws Exception {
-            MvcResult result = mockMvc.perform(post("/customers")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(customerJson))
-                    .andExpect(status().isCreated())
-                    .andReturn();
-
-            String responseBody = result.getResponse().getContentAsString();
-            String id = JsonPath.read(responseBody, "$.data.id");
+            String id = createCustomerAndExtractId();
 
             mockMvc.perform(patch("/customers/{id}/deactivate", id))
                     .andExpect(status().isOk())
@@ -197,14 +183,7 @@ class CustomerControllerIntegrationTest {
 
         @Test
         void shouldReturn200_whenCustomerExists() throws Exception {
-            MvcResult result = mockMvc.perform(post("/customers")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(customerJson))
-                    .andExpect(status().isCreated())
-                    .andReturn();
-
-            String responseBody = result.getResponse().getContentAsString();
-            String id = JsonPath.read(responseBody, "$.data.id");
+            String id = createCustomerAndExtractId();
 
             String payload = """
                     {
@@ -248,14 +227,7 @@ class CustomerControllerIntegrationTest {
 
         @Test
         void shouldReturn201_whenCustomerExists() throws Exception {
-            MvcResult result = mockMvc.perform(post("/customers")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(customerJson))
-                    .andExpect(status().isCreated())
-                    .andReturn();
-
-            String responseBody = result.getResponse().getContentAsString();
-            String id = JsonPath.read(responseBody, "$.data.id");
+            String id = createCustomerAndExtractId();
 
             String payload = """
                     {
@@ -304,5 +276,15 @@ class CustomerControllerIntegrationTest {
                     .andExpect(jsonPath("$.error").value("Resource Not Found"))
                     .andExpect(jsonPath("$.path").value("/customers/" + id + "/addresses"));
         }
+    }
+
+    private String createCustomerAndExtractId() throws Exception {
+        MvcResult result = mockMvc.perform(post("/customers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerJson))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        return JsonPath.read(result.getResponse().getContentAsString(), "$.data.id");
     }
 }
