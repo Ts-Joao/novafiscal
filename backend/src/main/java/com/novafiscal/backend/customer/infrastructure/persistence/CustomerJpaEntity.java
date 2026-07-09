@@ -1,4 +1,4 @@
-package com.novafiscal.backend.customer.infraestructure.persistence;
+package com.novafiscal.backend.customer.infrastructure.persistence;
 
 import com.novafiscal.backend.customer.domain.model.CustomerStatus;
 import com.novafiscal.backend.customer.domain.model.CustomerType;

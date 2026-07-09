@@ -1,4 +1,4 @@
-package com.novafiscal.backend.customer.infraestructure.persistence;
+package com.novafiscal.backend.customer.infrastructure.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

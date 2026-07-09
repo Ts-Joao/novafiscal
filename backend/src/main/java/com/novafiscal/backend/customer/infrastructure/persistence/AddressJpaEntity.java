@@ -1,4 +1,4 @@
-package com.novafiscal.backend.customer.infraestructure.persistence;
+package com.novafiscal.backend.customer.infrastructure.persistence;
 
 import com.novafiscal.backend.customer.domain.model.AddressType;
 import jakarta.persistence.*;
