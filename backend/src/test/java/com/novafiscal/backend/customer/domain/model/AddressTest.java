@@ -1,9 +1,6 @@
-package com.novafiscal.backend.customer.domain;
+package com.novafiscal.backend.customer.domain.model;
 
 import org.junit.jupiter.api.Test;
-
-import com.novafiscal.backend.customer.domain.model.Address;
-import com.novafiscal.backend.customer.domain.model.AddressType;
 
 import static org.junit.jupiter.api.Assertions.*;
 
