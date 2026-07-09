@@ -78,7 +78,7 @@ class CustomerControllerIntegrationTest {
         }
 
         @Test
-        void shouldReturn409WithDomainException_whenEmailAlreadyExists() throws Exception {
+        void shouldReturn409WithDomainException_whenDocumentAlreadyExists() throws Exception {
             mockMvc.perform(post("/customers")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(customerJson))
@@ -270,10 +270,10 @@ class CustomerControllerIntegrationTest {
                     }
                     """;
 
-            mockMvc.perform(patch("/customers/{id}/addresses", id)
+            mockMvc.perform(post("/customers/{id}/addresses", id)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(payload))
-                    .andExpect(status().isOk())
+                    .andExpect(status().isCreated())
                     .andExpect(jsonPath("$.data.legalName").value("João Teixeira"))
                     .andExpect(jsonPath("$.data.email").value("joao.teixeira@example.com"))
                     .andExpect(jsonPath("$.data.document.number").value("08710839090"))
@@ -297,7 +297,7 @@ class CustomerControllerIntegrationTest {
                     }
                     """;
 
-            mockMvc.perform(patch("/customers/{id}/addresses", id)
+            mockMvc.perform(post("/customers/{id}/addresses", id)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(payload))
                     .andExpect(status().isNotFound())

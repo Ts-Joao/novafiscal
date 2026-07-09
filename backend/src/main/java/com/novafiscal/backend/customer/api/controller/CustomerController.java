@@ -161,7 +161,7 @@ public class CustomerController {
             description = "Cliente não encontrado"
         )
     })
-    @PatchMapping("/{id}/addresses")
+    @PostMapping("/{id}/addresses")
     public ResponseEntity<ApiResponse<CustomerResponseDTO>> addAddress(
         @PathVariable UUID id, 
         @Valid @RequestBody AddAddressRequestDTO dto) {
@@ -170,7 +170,7 @@ public class CustomerController {
         Customer customer = customerService.addAddress(id, address);
         CustomerResponseDTO response = customerMapper.toResponse(customer);
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(new ApiResponse<>(Instant.now(), response));
     }
 }
