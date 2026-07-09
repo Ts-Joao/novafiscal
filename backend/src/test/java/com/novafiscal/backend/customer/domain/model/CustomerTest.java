@@ -56,15 +56,16 @@ public class CustomerTest {
   @Test
   public void shouldAddAddress_whenHasNoAddress() {
     Address address = Address.create(
-        AddressType.BILLING,
-        "Rua João da Silva",
-        "123",
-        "Centro",
-        "12345-123",
-        "SC",
-        "Blumenau",
-        "Brasil",
-        true);
+      AddressType.BILLING,
+      "Rua João da Silva",
+      "123",
+      "casa",
+      "Centro",
+      "Blumenau",
+      "SC",
+      "12345-123",
+      true);
+
     customerA.addAddress(address);
     assertEquals(address, customerA.getAddresses().getFirst());
   }
@@ -88,11 +89,11 @@ public class CustomerTest {
       AddressType.BILLING,
       "Rua João da Silva",
       "123",
+      "casa",
       "Centro",
-      "12345-123",
-      "SC",
       "Blumenau",
-      "Brasil",
+      "SC",
+      "12345-123",
       true);
 
     Customer customerB = Customer.create(
