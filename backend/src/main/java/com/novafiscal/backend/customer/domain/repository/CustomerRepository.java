@@ -14,4 +14,6 @@ public interface CustomerRepository {
     Optional<Customer> findByDocumentNumber(String documentNumber);
 
     boolean existsByDocumentNumber(String documentNumber);
+
+    void deleteAll();
 }

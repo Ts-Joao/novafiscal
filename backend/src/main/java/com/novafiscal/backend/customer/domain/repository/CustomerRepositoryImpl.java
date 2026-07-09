@@ -43,4 +43,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public boolean existsByDocumentNumber(String documentNumber) {
         return springDataCustomerJpaEntity.existsByDocumentNumber(documentNumber);
     }
+
+    @Override
+    public void deleteAll() {
+        springDataCustomerJpaEntity.deleteAll();
+    }
 }
