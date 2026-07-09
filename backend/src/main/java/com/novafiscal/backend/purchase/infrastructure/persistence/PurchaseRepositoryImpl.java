@@ -1,8 +1,7 @@
-package com.novafiscal.backend.purchase.domain.repository;
+package com.novafiscal.backend.purchase.infrastructure.persistence;
 
 import com.novafiscal.backend.purchase.domain.model.Purchase;
-import com.novafiscal.backend.purchase.infrastructure.persistence.PurchaseJpaEntity;
-import com.novafiscal.backend.purchase.infrastructure.persistence.SpringDataPurchaseRepository;
+import com.novafiscal.backend.purchase.domain.repository.PurchaseRepository;
 import com.novafiscal.backend.purchase.mapper.PurchaseEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

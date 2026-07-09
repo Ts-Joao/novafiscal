@@ -1,8 +1,7 @@
-package com.novafiscal.backend.customer.domain.repository;
+package com.novafiscal.backend.customer.infrastructure.persistence;
 
 import com.novafiscal.backend.customer.domain.model.Customer;
-import com.novafiscal.backend.customer.infraestructure.persistence.CustomerJpaEntity;
-import com.novafiscal.backend.customer.infraestructure.persistence.SpringDataCustomerJpaEntity;
+import com.novafiscal.backend.customer.domain.repository.CustomerRepository;
 import com.novafiscal.backend.customer.mapper.CustomerEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
