@@ -18,10 +18,11 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     public Customer create(Customer customer) {
-        boolean alreadyExist = customerRepository.existsByDocumentNumber(customer.getDocument().number());
+        boolean alreadyExistByDocument = customerRepository.existsByDocumentNumber(customer.getDocument().number());
+        boolean alreadyExistByEmail = customerRepository.existsByEmail(customer.getEmail());
 
-        if (alreadyExist) {
-           throw new DuplicatedCustomerException("Customer already exists with document: " + customer.getDocument().number());
+        if (alreadyExistByDocument || alreadyExistByEmail) {
+            throw new DuplicatedCustomerException("Customer already exists with this document or email");
         }
 
         return customerRepository.save(customer);

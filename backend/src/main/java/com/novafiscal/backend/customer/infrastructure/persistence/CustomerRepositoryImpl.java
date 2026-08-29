@@ -44,6 +44,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        return springDataCustomerJpaEntity.existsByEmail(email);
+    }
+
+    @Override
     public void deleteAll() {
         springDataCustomerJpaEntity.deleteAll();
     }

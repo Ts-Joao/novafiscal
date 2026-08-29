@@ -91,6 +91,21 @@ class CustomerControllerIntegrationTest {
                     .andExpect(jsonPath("$.error").value("Duplicated Customer"))
                     .andExpect(jsonPath("$.path").value("/customers"));
         }
+        
+        @Test
+        void shouldReturn409_whenStateRegistrationAlreadyExists() throws Exception {
+            mockMvc.perform(post("/customers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(customerJson))
+                    .andExpect(status().isCreated());
+
+            mockMvc.perform(post("/customers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(customerJson))
+                    .andExpect(status().isConflict())
+                    .andExpect(jsonPath("$.error").value("Duplicated Customer"))
+                    .andExpect(jsonPath("$.path").value("/customers"));
+        }
     }
 
     @Nested

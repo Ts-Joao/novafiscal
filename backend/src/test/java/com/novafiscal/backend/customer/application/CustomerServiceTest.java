@@ -60,6 +60,17 @@ class CustomerServiceTest {
         }
 
         @Test
+        void shouldThrowException_whenEmailAlreadyExists() {
+            when(customerRepository.existsByEmail(customerA.getEmail()))
+                    .thenReturn(true);
+
+            assertThatThrownBy(() -> customerService.create(customerA))
+                    .isInstanceOf(DuplicatedCustomerException.class);
+
+            verify(customerRepository, never()).save(any());
+        }
+
+        @Test
         void shouldThrowException_whenDocumentNumberAlreadyExists() {
             when(customerRepository.existsByDocumentNumber(customerA.getDocument().number()))
                     .thenReturn(true);

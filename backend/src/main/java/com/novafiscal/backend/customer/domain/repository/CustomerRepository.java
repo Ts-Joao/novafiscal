@@ -15,5 +15,7 @@ public interface CustomerRepository {
 
     boolean existsByDocumentNumber(String documentNumber);
 
+    boolean existsByEmail(String email);
+
     void deleteAll();
 }

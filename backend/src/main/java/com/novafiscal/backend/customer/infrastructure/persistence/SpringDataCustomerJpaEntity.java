@@ -10,4 +10,6 @@ public interface SpringDataCustomerJpaEntity extends JpaRepository<CustomerJpaEn
     Optional<CustomerJpaEntity> findByDocumentNumber(String documentNumber);
 
     boolean existsByDocumentNumber(String documentNumber);
+
+    boolean existsByEmail(String email);
 }
