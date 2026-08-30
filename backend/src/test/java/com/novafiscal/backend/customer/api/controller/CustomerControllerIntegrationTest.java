@@ -158,6 +158,25 @@ class CustomerControllerIntegrationTest {
                     .andExpect(jsonPath("$.error").value("Resource Not Found"))
                     .andExpect(jsonPath("$.path").value("/customers/" + id + "/deactivate"));
         }
+
+        @Test
+        void shouldReturn400_whenCustomerIsAlreadyInactive() throws Exception {
+            MvcResult result = mockMvc.perform(post("/customers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(customerJson))
+                    .andExpect(status().isCreated())
+                    .andReturn();
+
+            String responseBody = result.getResponse().getContentAsString();
+            String id = JsonPath.read(responseBody, "$.data.id");
+
+            mockMvc.perform(patch("/customers/{id}/deactivate", id))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.data.legalName").value("João Teixeira"))
+                    .andExpect(jsonPath("$.data.email").value("joao.teixeira@example.com"))
+                    .andExpect(jsonPath("$.data.document.number").value("08710839090"))
+                    .andExpect(jsonPath("$.data.document.type").value("CPF"));
+        }
     }
 
     @Nested
@@ -190,6 +209,25 @@ class CustomerControllerIntegrationTest {
                     .andExpect(status().isNotFound())
                     .andExpect(jsonPath("$.error").value("Resource Not Found"))
                     .andExpect(jsonPath("$.path").value("/customers/" + id + "/activate"));
+        }
+
+        @Test
+        void shouldReturn400_whenCustomerIsAlreadyActive() throws Exception {
+            MvcResult result = mockMvc.perform(post("/customers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(customerJson))
+                    .andExpect(status().isCreated())
+                    .andReturn();
+
+            String responseBody = result.getResponse().getContentAsString();
+            String id = JsonPath.read(responseBody, "$.data.id");
+
+            mockMvc.perform(patch("/customers/{id}/activate", id))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.data.legalName").value("João Teixeira"))
+                    .andExpect(jsonPath("$.data.email").value("joao.teixeira@example.com"))
+                    .andExpect(jsonPath("$.data.document.number").value("08710839090"))
+                    .andExpect(jsonPath("$.data.document.type").value("CPF"));
         }
     }
 
