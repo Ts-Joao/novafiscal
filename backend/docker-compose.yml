@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: novafiscal
       POSTGRES_PASSWORD: novafiscal
     ports:
-      - "5432:5432"
+      - "6000:5432"
     volumes:
       - novafiscal-postgres-data:/var/lib/postgresql/data
 

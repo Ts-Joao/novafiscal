@@ -3,7 +3,6 @@ package com.novafiscal.backend.purchase.infrastructure.persistence;
 import com.novafiscal.backend.common.AbstractIntegrationTest;
 import com.novafiscal.backend.purchase.domain.model.Purchase;
 import com.novafiscal.backend.purchase.domain.model.PurchaseItem;
-import com.novafiscal.backend.purchase.domain.repository.PurchaseRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
