@@ -1,4 +1,4 @@
-package com.novafiscal.backend.invoice.domain.models;
+package com.novafiscal.backend.invoice.domain.model;
 
 public enum PaymentMethod {
     CASH,

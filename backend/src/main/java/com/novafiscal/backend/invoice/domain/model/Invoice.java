@@ -1,4 +1,4 @@
-package com.novafiscal.backend.invoice.domain.models;
+package com.novafiscal.backend.invoice.domain.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
