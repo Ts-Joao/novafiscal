@@ -2,13 +2,17 @@ package com.novafiscal.backend.invoice.domain.model;
 
 import com.novafiscal.backend.invoice.domain.exceptions.InvoiceAlreadyAuthorizedException;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
 @Builder(toBuilder = true, access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract sealed class Invoice permits NFCeInvoice, NFeInvoice {
 
     protected UUID id;
