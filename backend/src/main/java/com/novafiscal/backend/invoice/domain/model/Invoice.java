@@ -24,14 +24,14 @@ public abstract sealed class Invoice permits NFCeInvoice, NFeInvoice {
     protected Instant authorizedAt;
     protected Instant canceledAt;
 
-    private void submit() {
+    public void submit() {
         if (status != InvoiceStatus.PENDING) {
             throw new IllegalStateException("Only pending invoices can be submitted");
         }
         this.status = InvoiceStatus.SUBMITTED;
     }
 
-    private void authorize(String protocolNumber, String accessKey) {
+    public void authorize(String protocolNumber, String accessKey) {
         if (status == InvoiceStatus.AUTHORIZED) {
             throw new InvoiceAlreadyAuthorizedException("Invoice already authorized");
         }
@@ -46,14 +46,14 @@ public abstract sealed class Invoice permits NFCeInvoice, NFeInvoice {
         this.authorizedAt = Instant.now();
     }
 
-    private void reject() {
+    public void reject() {
         if (status != InvoiceStatus.SUBMITTED) {
             throw new IllegalStateException("Only submitted invoices can be rejected");
         }
         this.status = InvoiceStatus.REJECTED;
     }
 
-    private void cancel() {
+    public void cancel() {
         if (status != InvoiceStatus.AUTHORIZED) {
             throw new IllegalStateException("Only authorized invoices can be cancelled");
         }
