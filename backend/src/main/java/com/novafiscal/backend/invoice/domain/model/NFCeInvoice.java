@@ -60,13 +60,14 @@ public final class NFCeInvoice extends Invoice {
                 .build();
     }
 
-    private void validateCpf( String cpf) {
-        if (cpf == null || cpf.trim().isEmpty()) {
+    private void validateCpf(String cpf) {
+        if (cpf == null || cpf.isBlank()) {
             throw new InvalidDocumentException("Invalid CPF number");
         }
 
-        String regex = "^(\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}|\\d{11})$";
-        if (!cpf.matches(regex)) {
+        String cleanCpf = cpf.replaceAll("\\D", "");
+
+        if (!cleanCpf.matches("^(?!(\\d)\\1{10}$)\\d{11}$")) {
             throw new InvalidDocumentException("Invalid customer CPF");
         }
     }
