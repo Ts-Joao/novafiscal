@@ -2,17 +2,15 @@ package com.novafiscal.backend.invoice.domain.model;
 
 import com.novafiscal.backend.invoice.domain.exceptions.InvoiceAlreadyAuthorizedException;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
-@Builder(toBuilder = true, access = AccessLevel.PACKAGE)
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract sealed class Invoice permits NFCeInvoice, NFeInvoice {
 
     protected UUID id;
@@ -25,36 +23,6 @@ public abstract sealed class Invoice permits NFCeInvoice, NFeInvoice {
     protected Instant issuedAt;
     protected Instant authorizedAt;
     protected Instant canceledAt;
-
-    protected static Invoice create(UUID id, UUID customerId, UUID purchaseId, BigDecimal totalAmount) {
-        Invoice invoice = Invoice.builder()
-                .id(id)
-                .customerId(customerId)
-                .purchaseId(purchaseId)
-                .status(InvoiceStatus.PENDING)
-                .totalAmount(totalAmount)
-                .build();
-
-        return invoice;
-    }
-
-    protected static Invoice reconstitute(UUID id, UUID customerId, UUID purchaseId, InvoiceStatus status, BigDecimal totalAmount,
-                                            String protocolNumber, String accessKey, Instant issuedAt, Instant authorizedAt, Instant canceledAt) {
-        Invoice invoice = Invoice.builder()
-                .id(id)
-                .customerId(customerId)
-                .purchaseId(purchaseId)
-                .status(status)
-                .totalAmount(totalAmount)
-                .protocolNumber(protocolNumber)
-                .accessKey(accessKey)
-                .issuedAt(issuedAt)
-                .authorizedAt(authorizedAt)
-                .canceledAt(canceledAt)
-                .build();
-
-        return invoice;
-    }
 
     private void submit() {
         if (status != InvoiceStatus.PENDING) {
