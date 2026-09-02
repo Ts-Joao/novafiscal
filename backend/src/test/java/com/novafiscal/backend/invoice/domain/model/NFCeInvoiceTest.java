@@ -27,7 +27,7 @@ class NFCeInvoiceTest {
     @Test
     void shouldCreateNFCeInvoiceSuccessfully_whenCalled() {
         assertNotNull(nfceInvoiceA);
-        assertEquals("08710839090", nfceInvoiceA.getCustomerCpf());
+        assertEquals("08710839090", nfceInvoiceA.getConsumerCpf());
     }
 
     @Test

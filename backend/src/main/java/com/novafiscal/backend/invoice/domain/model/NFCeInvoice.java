@@ -15,11 +15,11 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class NFCeInvoice extends Invoice {
 
-    private String customerCpf;
+    private String consumerCpf;
     private PaymentMethod paymentMethod;
     private BigDecimal changeAmount;
 
-    public static NFCeInvoice create(UUID customerId, UUID purchaseId, BigDecimal totalAmount, String customerCpf,
+    public static NFCeInvoice create(UUID customerId, UUID purchaseId, BigDecimal totalAmount, String consumerCpf,
                                     PaymentMethod paymentMethod, BigDecimal changeAmount) {
 
         NFCeInvoice invoice = NFCeInvoice.builder()
@@ -30,17 +30,17 @@ public final class NFCeInvoice extends Invoice {
                 .totalAmount(totalAmount)
                 .paymentMethod(paymentMethod)
                 .changeAmount(changeAmount)
-                .customerCpf(customerCpf)
+                .consumerCpf(consumerCpf)
                 .build();
 
-        invoice.validateCpf(customerCpf);
+        invoice.validateCpf(consumerCpf);
 
         return invoice;
     }
 
     public static NFCeInvoice reconstitute(UUID id, UUID customerId, UUID purchaseId, InvoiceStatus status,
                                           BigDecimal totalAmount, String protocolNumber, String accessKey,
-                                          PaymentMethod paymentMethod, BigDecimal changeAmount, String customerCpf,
+                                          PaymentMethod paymentMethod, BigDecimal changeAmount, String consumerCpf,
                                           Instant issuedAt, Instant authorizedAt, Instant canceledAt) {
 
         return NFCeInvoice.builder()
@@ -53,7 +53,7 @@ public final class NFCeInvoice extends Invoice {
                 .accessKey(accessKey)
                 .paymentMethod(paymentMethod)
                 .changeAmount(changeAmount)
-                .customerCpf(customerCpf)
+                .consumerCpf(consumerCpf)
                 .issuedAt(issuedAt)
                 .authorizedAt(authorizedAt)
                 .canceledAt(canceledAt)
