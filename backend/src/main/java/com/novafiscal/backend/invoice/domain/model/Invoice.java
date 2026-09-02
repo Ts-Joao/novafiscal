@@ -2,6 +2,7 @@ package com.novafiscal.backend.invoice.domain.model;
 
 import com.novafiscal.backend.invoice.domain.exceptions.InvoiceAlreadyAuthorizedException;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
+@Getter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract sealed class Invoice permits NFCeInvoice, NFeInvoice {

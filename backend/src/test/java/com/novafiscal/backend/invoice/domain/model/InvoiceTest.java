@@ -36,6 +36,7 @@ class InvoiceTest {
         @Test
         void shouldSubmitSuccessfully_whenCalled() {
             assertDoesNotThrow(invoiceA::submit);
+            assertEquals(InvoiceStatus.SUBMITTED, invoiceA.getStatus());
         }
 
         @Test
@@ -57,6 +58,10 @@ class InvoiceTest {
                     .build();
 
             assertDoesNotThrow(() -> invoiceB.authorize("123", "123"));
+            assertEquals("123",invoiceB.getProtocolNumber());
+            assertEquals("123", invoiceB.getAccessKey());
+            assertNotNull(invoiceB.authorizedAt);
+            assertEquals(InvoiceStatus.AUTHORIZED, invoiceB.getStatus());
         }
 
         @Test
@@ -83,6 +88,7 @@ class InvoiceTest {
                     .build();
 
             assertDoesNotThrow(invoiceB::reject);
+            assertEquals(InvoiceStatus.REJECTED, invoiceB.getStatus());
         }
 
         @Test
@@ -100,6 +106,8 @@ class InvoiceTest {
                     .build();
 
             assertDoesNotThrow(invoiceB::cancel);
+            assertEquals(InvoiceStatus.CANCELED, invoiceB.getStatus());
+            assertNotNull(invoiceB.canceledAt);
         }
 
         @Test
