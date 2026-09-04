@@ -7,34 +7,27 @@ import com.novafiscal.backend.invoice.domain.model.NFeInvoice;
 import com.novafiscal.backend.invoice.infrastructure.persistence.InvoiceJpaEntity;
 import com.novafiscal.backend.invoice.infrastructure.persistence.NFCeInvoiceJpaEntity;
 import com.novafiscal.backend.invoice.infrastructure.persistence.NFeInvoiceJpaEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
-import org.mapstruct.SubclassMapping;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
+@Mapper(
+    componentModel = "spring",
+    unmappedTargetPolicy = ReportingPolicy.ERROR
+)
 public interface InvoiceEntityMapper {
 
-    @SubclassMapping(source = NFCeInvoice.class, target = NFCeInvoiceJpaEntity.class)
-    @SubclassMapping(source = NFeInvoice.class, target = NFeInvoiceJpaEntity.class)
-    Invoice toDomain(InvoiceJpaEntity entity);
+    @SubclassMapping(source = NFeInvoiceJpaEntity.class, target = NFeInvoice.class)
+    @SubclassMapping(source = NFCeInvoiceJpaEntity.class, target = NFCeInvoice.class)
+    default Invoice toDomain(InvoiceJpaEntity entity) {
+        if (entity == null) {
+            return null;
+        }
 
-    default NFCeInvoice toDomain(NFCeInvoiceJpaEntity entity) {
-        return NFCeInvoice.reconstitute(
-                entity.getId(),
-                entity.getCustomerId(),
-                entity.getPurchaseId(),
-                entity.getStatus(),
-                entity.getTotalAmount(),
-                entity.getProtocolNumber(),
-                entity.getAccessKey(),
-                entity.getPaymentMethod(),
-                entity.getChangeAmount(),
-                entity.getConsumerCpf(),
-                entity.getIssuedAt(),
-                entity.getAuthorizedAt(),
-                entity.getCanceledAt()
-        );
-    };
+        return switch (entity) {
+            case NFeInvoiceJpaEntity nfe -> toDomain(nfe);
+            case NFCeInvoiceJpaEntity nfce -> toDomain(nfce);
+            default -> throw new IllegalArgumentException("Unsupported entity type");
+        };
+    }
 
     default NFeInvoice toDomain(NFeInvoiceJpaEntity entity) {
         return NFeInvoice.reconstitute(
@@ -52,12 +45,41 @@ public interface InvoiceEntityMapper {
                 entity.getAuthorizedAt(),
                 entity.getCanceledAt()
         );
-    };
+    }
 
-    @SubclassMapping(source = NFCeInvoiceJpaEntity.class, target = NFCeInvoice.class)
-    @SubclassMapping(source = NFeInvoiceJpaEntity.class, target = NFeInvoice.class)
-    InvoiceJpaEntity toEntity(Invoice invoice);
+    default NFCeInvoice toDomain(NFCeInvoiceJpaEntity entity) {
+        return NFCeInvoice.reconstitute(
+                entity.getId(),
+                entity.getCustomerId(),
+                entity.getPurchaseId(),
+                entity.getStatus(),
+                entity.getTotalAmount(),
+                entity.getProtocolNumber(),
+                entity.getAccessKey(),
+                entity.getPaymentMethod(),
+                entity.getChangeAmount(),
+                entity.getConsumerCpf(),
+                entity.getIssuedAt(),
+                entity.getAuthorizedAt(),
+                entity.getCanceledAt()
+        );
+    }
+
+    @SubclassMapping(source = NFeInvoice.class, target = NFeInvoiceJpaEntity.class)
+    @SubclassMapping(source = NFCeInvoice.class, target = NFCeInvoiceJpaEntity.class)
+    default InvoiceJpaEntity toEntity(Invoice invoice) {
+        if (invoice == null) {
+            return null;
+        }
+        return switch (invoice) {
+            case NFeInvoice nfe -> toEntity(nfe);
+            case NFCeInvoice nfce -> toEntity(nfce);
+        };
+    }
+
+    @Mapping(target = "customerDocumentNumber", source = "customerDocument.number")
+    @Mapping(target = "customerDocumentType", source = "customerDocument.type")
+    NFeInvoiceJpaEntity toEntity(NFeInvoice nfeInvoice);
 
     NFCeInvoiceJpaEntity toEntity(NFCeInvoice nfceInvoice);
-    NFeInvoiceJpaEntity toEntity(NFeInvoice nfeInvoice);
 }
