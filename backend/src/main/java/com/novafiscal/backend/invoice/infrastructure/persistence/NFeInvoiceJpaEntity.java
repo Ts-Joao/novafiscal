@@ -21,6 +21,7 @@ public class NFeInvoiceJpaEntity extends InvoiceJpaEntity {
     @Column(name = "customer_state_registration", nullable = false)
     private String customerStateRegistration;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "customer_document_type", nullable = false)
     private DocumentType customerDocumentType;
 
