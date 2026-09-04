@@ -1,4 +1,4 @@
-package com.novafiscal.backend.customer.domain.model;
+package com.novafiscal.backend.common.domain.model;
 
 import com.novafiscal.backend.customer.domain.exception.InvalidDocumentException;
 

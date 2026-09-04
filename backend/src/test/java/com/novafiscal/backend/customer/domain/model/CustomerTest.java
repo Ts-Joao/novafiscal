@@ -1,5 +1,7 @@
 package com.novafiscal.backend.customer.domain.model;
 
+import com.novafiscal.backend.common.domain.model.Document;
+import com.novafiscal.backend.common.domain.model.DocumentType;
 import com.novafiscal.backend.customer.domain.exception.CustomerAlreadyInactiveException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,5 +1,6 @@
 package com.novafiscal.backend.invoice.infrastructure.persistence;
 
+import com.novafiscal.backend.common.domain.model.DocumentType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class NFeInvoiceJpaEntity extends InvoiceJpaEntity {
     private String customerStateRegistration;
 
     @Column(name = "customer_document_type", nullable = false)
-    private String customerDocumentType;
+    private DocumentType customerDocumentType;
 
     @Column(name = "customer_document_number", nullable = false)
     private String customerDocumentNumber;

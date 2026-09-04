@@ -1,7 +1,7 @@
 package com.novafiscal.backend.invoice.domain.model;
 
 import com.novafiscal.backend.customer.domain.exception.InvalidDocumentException;
-import com.novafiscal.backend.customer.domain.model.Document;
+import com.novafiscal.backend.common.domain.model.Document;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

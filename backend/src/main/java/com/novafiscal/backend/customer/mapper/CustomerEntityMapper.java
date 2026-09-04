@@ -2,7 +2,7 @@ package com.novafiscal.backend.customer.mapper;
 
 import com.novafiscal.backend.customer.domain.model.Address;
 import com.novafiscal.backend.customer.domain.model.Customer;
-import com.novafiscal.backend.customer.domain.model.Document;
+import com.novafiscal.backend.common.domain.model.Document;
 import com.novafiscal.backend.customer.infrastructure.persistence.AddressJpaEntity;
 import com.novafiscal.backend.customer.infrastructure.persistence.CustomerJpaEntity;
 import org.mapstruct.AfterMapping;

@@ -3,7 +3,7 @@ package com.novafiscal.backend.customer.mapper;
 import com.novafiscal.backend.customer.api.dto.*;
 import com.novafiscal.backend.customer.domain.model.Address;
 import com.novafiscal.backend.customer.domain.model.Customer;
-import com.novafiscal.backend.customer.domain.model.Document;
+import com.novafiscal.backend.common.domain.model.Document;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

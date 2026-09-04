@@ -2,7 +2,7 @@ package com.novafiscal.backend.customer.infrastructure.persistence;
 
 import com.novafiscal.backend.customer.domain.model.CustomerStatus;
 import com.novafiscal.backend.customer.domain.model.CustomerType;
-import com.novafiscal.backend.customer.domain.model.DocumentType;
+import com.novafiscal.backend.common.domain.model.DocumentType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

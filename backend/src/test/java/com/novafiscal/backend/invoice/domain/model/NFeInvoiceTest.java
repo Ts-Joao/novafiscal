@@ -1,8 +1,8 @@
 package com.novafiscal.backend.invoice.domain.model;
 
 import com.novafiscal.backend.customer.domain.exception.InvalidDocumentException;
-import com.novafiscal.backend.customer.domain.model.Document;
-import com.novafiscal.backend.customer.domain.model.DocumentType;
+import com.novafiscal.backend.common.domain.model.Document;
+import com.novafiscal.backend.common.domain.model.DocumentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

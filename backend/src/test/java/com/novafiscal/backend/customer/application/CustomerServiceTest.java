@@ -1,5 +1,7 @@
 package com.novafiscal.backend.customer.application;
 
+import com.novafiscal.backend.common.domain.model.Document;
+import com.novafiscal.backend.common.domain.model.DocumentType;
 import com.novafiscal.backend.common.exception.ResourceNotFoundException;
 import com.novafiscal.backend.customer.api.dto.UpdateContactInfoRequestDTO;
 import com.novafiscal.backend.customer.domain.exception.DuplicatedCustomerException;

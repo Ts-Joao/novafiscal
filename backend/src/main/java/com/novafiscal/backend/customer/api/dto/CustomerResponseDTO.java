@@ -2,7 +2,6 @@ package com.novafiscal.backend.customer.api.dto;
 
 import com.novafiscal.backend.customer.domain.model.CustomerStatus;
 import com.novafiscal.backend.customer.domain.model.CustomerType;
-import com.novafiscal.backend.customer.domain.model.DocumentType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
