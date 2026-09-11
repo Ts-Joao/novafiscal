@@ -15,4 +15,6 @@ public interface InvoiceRepository {
     List<Invoice> findByCustomerId(UUID customerId);
 
     Optional<Invoice> findByAccessKey(String accessKey);
+
+    void deleteAll();
 }

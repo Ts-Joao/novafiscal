@@ -44,4 +44,9 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
         return springDataInvoiceJpaEntity.findByAccessKey(accessKey)
                 .map(invoiceEntityMapper::toDomain);
     }
+
+    @Override
+    public void deleteAll() {
+        springDataInvoiceJpaEntity.deleteAll();
+    }
 }
