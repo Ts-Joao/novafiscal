@@ -28,6 +28,7 @@ public final class NFCeInvoice extends Invoice {
                 .purchaseId(purchaseId)
                 .status(InvoiceStatus.PENDING)
                 .totalAmount(totalAmount)
+                .issuedAt(Instant.now())
                 .paymentMethod(paymentMethod)
                 .changeAmount(changeAmount)
                 .consumerCpf(consumerCpf)

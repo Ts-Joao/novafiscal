@@ -25,7 +25,7 @@ CREATE TABLE nfe_invoice (
 CREATE TABLE nfce_invoice (
     id              UUID PRIMARY KEY REFERENCES invoice(id),
     consumer_cpf    VARCHAR(11),
-    payment_method  VARCHAR(20) CHECK (payment_method IN ('PIX', 'CREDIT_CARD', 'DEBIT_CARD')) NOT NULL,
+    payment_method  VARCHAR(20) CHECK (payment_method IN ('PIX', 'CREDIT_CARD', 'DEBIT_CARD', 'CASH')) NOT NULL,
     change_amount   NUMERIC(15,2)
 );
 

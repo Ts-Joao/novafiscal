@@ -41,7 +41,7 @@ public final class NFeInvoice extends Invoice {
                 .icmsAmount(icmsAmount)
                 .build();
 
-        invoice.verifyState(customerStateRegistration);
+//        invoice.verifyState(customerStateRegistration);
 
         return invoice;
     }
