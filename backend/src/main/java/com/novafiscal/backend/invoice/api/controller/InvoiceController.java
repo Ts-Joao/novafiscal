@@ -111,9 +111,9 @@ public class InvoiceController {
             description = "Invoices not found"
         )
     })
-    @GetMapping("/{id}/customer")
-    public ResponseEntity<ApiResponse<List<InvoiceResponseDTO>>> findByCustomerId(@PathVariable UUID id) {
-        List<Invoice> invoices = invoiceService.findByCustomerId(id);
+    @GetMapping("/{customerId}/customer")
+    public ResponseEntity<ApiResponse<List<InvoiceResponseDTO>>> findByCustomerId(@PathVariable UUID customerId) {
+        List<Invoice> invoices = invoiceService.findByCustomerId(customerId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ApiResponse<>(
