@@ -36,14 +36,21 @@ public interface InvoiceMapper {
         );
     }
 
-    @SubclassMapping(source = NFeInvoice.class, target = InvoiceResponseDTO.class)
-    @SubclassMapping(source = NFCeInvoice.class, target = InvoiceResponseDTO.class)
-    InvoiceResponseDTO toResponse(Invoice invoice);
+    default InvoiceResponseDTO toResponse(Invoice invoice) {
+        if (invoice instanceof NFeInvoice nfeInvoice) {
+            return toResponse(nfeInvoice);
+        }
+        if (invoice instanceof NFCeInvoice nfceInvoice) {
+            return toResponse(nfceInvoice);
+        }
+        throw new IllegalArgumentException("Unknown invoice type: " + invoice.getClass());
+    }
 
     @Mapping(target = "invoiceType", constant = "NFE")
     @Mapping(target = "customerDocumentNumber", source = "customerDocument.number")
     @Mapping(target = "customerDocumentType", source = "customerDocument.type")
     @Mapping(target = "consumerCpf", ignore = true)
+    @Mapping(target = "operationNature", ignore = true)
     @Mapping(target = "paymentMethod", ignore = true)
     @Mapping(target = "changeAmount", ignore = true)
     InvoiceResponseDTO toResponse(NFeInvoice invoice);
