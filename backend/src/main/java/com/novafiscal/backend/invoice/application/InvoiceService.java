@@ -32,4 +32,28 @@ public class InvoiceService {
         return invoiceRepository.findByAccessKey(accessKey)
                 .orElseThrow(() -> new ResourceNotFoundException("Invoice with accessKey " + accessKey + " not found!"));
     }
+
+    public Invoice submit(UUID id) {
+        Invoice invoice = findById(id);
+        invoice.submit();
+        return invoiceRepository.save(invoice);
+    }
+
+    public Invoice authorize(UUID id, String protocolNumber, String accessKey) {
+        Invoice invoice = findById(id);
+        invoice.authorize(protocolNumber, accessKey);
+        return invoiceRepository.save(invoice);
+    }
+
+    public Invoice reject(UUID id) {
+        Invoice invoice = findById(id);
+        invoice.reject();
+        return invoiceRepository.save(invoice);
+    }
+
+    public Invoice cancel(UUID id) {
+        Invoice invoice = findById(id);
+        invoice.cancel();
+        return invoiceRepository.save(invoice);
+    }
 }
